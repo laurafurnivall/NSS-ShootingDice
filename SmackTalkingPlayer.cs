@@ -14,12 +14,29 @@ namespace ShootingDice
             Taunt = "Yo' mama could roll dice better than you!";
         }
 
-        public override int Roll()
+        public override void Play(Player other)
         {
-            // Return a random number between 1 and DiceSize
-            Console.WriteLine($"{Name} says {Taunt}");
-            return new Random().Next(DiceSize) + 1;
+            // Call roll for "this" object and for the "other" object
+            int myRoll = Roll();
+            int otherRoll = other.Roll();
 
+            Console.WriteLine($"{Name} rolls a {myRoll}");
+            Console.WriteLine($"{other.Name} rolls a {otherRoll}");
+            if (myRoll > otherRoll)
+            {
+                Console.WriteLine($"{Name} Wins!");
+                Console.WriteLine($"{Taunt}");
+            }
+            else if (myRoll < otherRoll)
+            {
+                Console.WriteLine($"{other.Name} Wins!");
+            }
+            else
+            {
+                // if the rolls are equal it's a tie
+                Console.WriteLine("It's a tie");
+            }
         }
+
     }
 }
