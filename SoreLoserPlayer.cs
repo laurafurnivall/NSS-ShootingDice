@@ -10,7 +10,29 @@ namespace ShootingDice
     {
         public SoreLoserPlayer()
         {
-            Console.WriteLine($"{Name} threw a temper tantrum. They hate ties or losing!");
+            Name = "Sore Loser";
+        }
+        public override void Play(Player other)
+        {
+            // Call roll for "this" object and for the "other" object
+            int myRoll = Roll();
+            int otherRoll = other.Roll();
+
+            Console.WriteLine($"{Name} rolls a {myRoll}");
+            Console.WriteLine($"{other.Name} rolls a {otherRoll}");
+            if (myRoll > otherRoll)
+            {
+                Console.WriteLine($"{Name} Wins!");
+            }
+            else if (myRoll < otherRoll)
+            {
+                throw new ILost();
+            }
+            else
+            {
+                // if the rolls are equal it's a tie
+                Console.WriteLine("It's a tie");
+            }
         }
     }
 }

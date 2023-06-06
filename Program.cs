@@ -61,14 +61,40 @@ namespace ShootingDice
             Console.WriteLine("-------------------");
 
             Player sore = new SoreLoserPlayer();
-            sore.Name = "Sore Loser";
+            try
+            {
+                sore.Play(player2);
+            }
+            catch
+            {
+                Console.WriteLine("*a table is thrown across the room* Uh oh! Someone's a sore loser!");
+            }
 
-            sore.Play(player2);
+            Console.WriteLine("-------------------");
+
+
+            Player high = new UpperHalfPlayer();
+            high.Name = "Rolling High";
+
+            high.Play(player1);
+
+            Console.WriteLine("-------------------");
+
+            Player soreTwo = new SoreLoserUpperHalfPlayer();
+            soreTwo.Name = "High 'N Sore";
+            try
+            {
+                soreTwo.Play(player3);
+            }
+            catch
+            {
+                Console.WriteLine("*a table is thrown across the room* Uh oh! Someone's a sore loser!");
+            }
 
             Console.WriteLine("-------------------");
 
             List<Player> players = new List<Player>() {
-                player1, player2, player3, large, smack, oneUp, human, twoUp, sore
+                player1, player2, player3, large, smack, oneUp, human, twoUp, sore, high, soreTwo
             };
 
             PlayMany(players);
@@ -94,14 +120,21 @@ namespace ShootingDice
 
             // Loop over the players 2 at a time
             for (int i = 0; i < maxIndex; i += 2)
-            {
-                Console.WriteLine("-------------------");
+                try
+                {
+                    {
+                        Console.WriteLine("-------------------");
 
-                // Make adjacent players play noe another
-                Player player1 = shuffledPlayers[i];
-                Player player2 = shuffledPlayers[i + 1];
-                player1.Play(player2);
-            }
+                        // Make adjacent players play noe another
+                        Player player1 = shuffledPlayers[i];
+                        Player player2 = shuffledPlayers[i + 1];
+                        player1.Play(player2);
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("*a table is thrown across the room* Uh oh! Someone's a sore loser!");
+                }
         }
     }
 }
